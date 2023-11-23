@@ -1,8 +1,13 @@
 @import 'variables';
 
 .user-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    margin-right: 5px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.card-img-top {
+  max-width: 414px;
+  max-height: 231px;
 }
