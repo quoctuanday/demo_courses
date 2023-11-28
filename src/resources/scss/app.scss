@@ -1,13 +1,53 @@
 @import 'variables';
 
+.container {
+    margin-bottom: 10px;
+}
+
 .user-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  margin-right: 5px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
 
 .card-img-top {
-  max-width: 414px;
-  max-height: 231px;
+    max-width: 414px;
+    max-height: 240px;
+}
+
+.form-select-checkall {
+    max-width: 200px;
+    margin: 0 8px;
+}
+
+.card-body {
+    max-height: 165px;
+}
+
+.card-name {
+    overflow: hidden;
+    text-decoration: none;
+    color: $black-color;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-description {
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.video-description {
+    display: block;
+    max-width: 870px;
+}
+
+.list-courses {
+    max-height: 644px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

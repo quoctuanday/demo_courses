@@ -1,20 +1,56 @@
-<div class='mt-4'>
-    <div class='row'>
-        <div class='col-lg-3'>
-            <button>Xem ngay</button>
-        </div>
-        <div class='col-lg-9'>
-            <h2>{{course.name}}</h2>
+<div class="mt-4">
+    <div class="row">
+        <div class="col-lg-8">
             <iframe
-                width='560'
-                height='315'
-                src='https://www.youtube.com/embed/{{course.videoId}}?si=8lEP-6tq9RcW6AsR'
-                title='YouTube video player'
-                frameborder='0'
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                width="90%"
+                height="491"
+                src="https://www.youtube.com/embed/{{singleCourse.videoId}}?si=8lEP-6tq9RcW6AsR"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
             ></iframe>
-            <p>{{course.description}}</p>
+            <h2>{{singleCourse.name}}</h2>
+            <p class="video-description">{{singleCourse.description}}</p>
+        </div>
+        <div class="row col-lg-4">
+            <div class="card">
+                <ul class="list-group list-group-flush list-courses">
+                    <div class="row">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-light">
+                                Tất cả
+                            </button>
+                        </div>
+                    </div>
+
+                    {{#each courses}}
+                    <li
+                        class="row list-group-item d-flex align-items-center item-watched"
+                    >
+                        <div class="col-lg-3">
+                            <a href="/courses/{{this.slug}}">
+                                <img
+                                    src="{{this.image}}"
+                                    class="card-img-top"
+                                    alt="..."
+                                />
+                            </a>
+                        </div>
+                        <div class="col-lg-9">
+                            <a href="/courses/{{this.slug}}" class="card-name">
+                                <h5 class="card-title card-name">
+                                    {{this.name}}
+                                </h5>
+                            </a>
+                            <p class="card-text card-description">
+                                {{this.description}}
+                            </p>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
     </div>
 </div>

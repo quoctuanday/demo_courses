@@ -1,16 +1,30 @@
 const Course = require('../models/Course');
 const { mongooseToObject } = require('../../util/mongoose');
+const { multipleMongooseToObject } = require('../../util/mongoose');
 const { param } = require('../../routes/courses');
 
 class CourseController {
     show(req, res, next) {
-        Course.findOne({ slug: req.params.slug })
-            .then(course => {
-                res.render('courses/show', {
-                    course: mongooseToObject(course),
-                });
+        Course.find({})
+            .then(courses => {
+                Course.findOne({ slug: req.params.slug })
+                    .then(singleCourse => {
+                        res.render('courses/show', {
+                            courses: multipleMongooseToObject(courses),
+                            singleCourse: mongooseToObject(singleCourse), // Đối tượng kết quả từ findOne
+                        });
+                    })
+                    .catch(next);
             })
             .catch(next);
+
+        // Course.findOne({ slug: req.params.slug })
+        //     .then(course => {
+        //         res.render('courses/show', {
+        //             course: mongooseToObject(course),
+        //         });
+        //     })
+        //     .catch(next);
     }
 
     create(req, res, next) {
@@ -66,6 +80,29 @@ class CourseController {
         Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
+    }
+
+    //[POST] /courses/handle-form-actions
+    handleFormActions(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ _id: { $in: req.body.courseIds } }) //Xóa tất cả những item có id giống trong list req.body.courseIds
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'forceDestroy':
+                Course.deleteOne({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Invalid action' });
+        }
     }
 }
 

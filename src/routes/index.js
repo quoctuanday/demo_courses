@@ -8,6 +8,7 @@ function route(app) {
     //     res.render('news');
     // });
     //Duoc thay bang dong duoi
+
     app.use('/news', newsRouter);
     app.use('/me', meRouter);
 
